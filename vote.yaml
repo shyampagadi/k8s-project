@@ -27,12 +27,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: myapp
+  name: vote-service
   namespace: voting
 spec:
   selector:
-    app: myapp
+    app: vote
   ports:
   - port: 8080
     targetPort: 80
-
+  type: LoadBalancer
