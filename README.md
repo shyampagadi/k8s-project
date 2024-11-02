@@ -375,7 +375,7 @@ This capstone project covers multiple Kubernetes topics and simulates a real-wor
 Feel free to ask if you need any specific resources, links, or additional details on any of the steps!
 
 
-###Improvements after Phase 1:
+### Improvements after Phase 1:
 
 It looks like you've shared a comprehensive configuration for your voting application deployed on Kubernetes. Here’s a quick overview of what your configuration files include:
 
