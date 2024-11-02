@@ -462,4 +462,4 @@ You’re already well-prepared with Kubernetes, Docker, and shell scripting, whi
 4. Integrate **Security Practices** with DevSecOps.
 5. Advance with **SRE Practices and Observability** for production environments.
 
-By progressing through these areas, you'll gain the skills to manage infrastructure, automate deployments, secure applications, and ensure high availability and observability in production environments.
+By progressing through these areas, you'll gain the skills to manage infrastructure, automate deployments, secure applications, and ensure high availability and observability in production environments. Save
