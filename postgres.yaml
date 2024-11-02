@@ -17,7 +17,7 @@ spec:
         image: postgres:15-alpine
         env:
         - name: POSTGRES_USER
-          value: postgres:15-
+          value: postgres
         - name: POSTGRES_PASSWORD
           value: postgres
         resources:
