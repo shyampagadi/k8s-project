@@ -1,0 +1,50 @@
+# helmfile.yaml
+
+releases:
+  - name: db
+    chart: ./Project/db  # Path to the DB chart
+    namespace: voting
+    values:
+      - ./Project/values-db.yaml
+    tags:
+      - database
+
+  - name: redis
+    chart: ./Project/redis  # Path to the Redis chart
+    namespace: voting
+    values:
+      - ./Project/values-redis.yaml
+    tags:
+      - cache
+
+  - name: vote
+    chart: ./Project/vote  # Path to the Vote service chart
+    namespace: voting
+    values:
+      - ./Project/values-vote.yaml
+    tags:
+      - voting-app
+
+  - name: result
+    chart: ./Project/result  # Path to the Result service chart
+    namespace: voting
+    values:
+      - ./Project/values-result.yaml
+    tags:
+      - voting-app
+
+  - name: ingress
+    chart: ./Project/ingress  # Path to the Ingress chart
+    namespace: voting
+    values:
+      - ./Project/values-ingress.yaml
+    tags:
+      - ingress
+
+  - name: worker
+    chart: ./Project/worker  # Path to the Worker chart
+    namespace: voting
+    values:
+      - ./Project/values-worker.yaml
+    tags:
+      - worker
