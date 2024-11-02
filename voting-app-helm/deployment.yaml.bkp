@@ -1,0 +1,130 @@
+{{- $namespace := .Values.namespace -}}
+{{- $name := .Release.Name -}}
+
+{{- if .Values.db.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $name }}-db
+  namespace: {{ $namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+        - name: db
+          image: {{ .Values.db.image }}
+          env:
+            - name: POSTGRES_USER
+              value: {{ .Values.db.env.POSTGRES_USER }}
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.db.env.POSTGRES_PASSWORD }}
+          resources:
+            {{- toYaml .Values.db.resources | nindent 12 }}
+          ports:
+            - containerPort: 5432
+{{- end }}
+
+{{- if .Values.redis.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $name }}-redis
+  namespace: {{ $namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: {{ .Values.redis.image }}
+          resources:
+            {{- toYaml .Values.redis.resources | nindent 12 }}
+          ports:
+            - containerPort: 6379
+{{- end }}
+
+{{- if .Values.vote.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $name }}-vote
+  namespace: {{ $namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: vote
+  template:
+    metadata:
+      labels:
+        app: vote
+    spec:
+      containers:
+        - name: vote
+          image: {{ .Values.vote.image }}
+          resources:
+            {{- toYaml .Values.vote.resources | nindent 12 }}
+          ports:
+            - containerPort: 80
+{{- end }}
+
+{{- if .Values.result.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $name }}-result
+  namespace: {{ $namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: result
+  template:
+    metadata:
+      labels:
+        app: result
+    spec:
+      containers:
+        - name: result
+          image: {{ .Values.result.image }}
+          resources:
+            {{- toYaml .Values.result.resources | nindent 12 }}
+          ports:
+            - containerPort: 80
+{{- end }}
+
+{{- if .Values.worker.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $name }}-worker
+  namespace: {{ $namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      containers:
+        - name: worker
+          image: {{ .Values.worker.image }}
+          resources:
+            {{- toYaml .Values.worker.resources | nindent 12 }}
+{{- end }}

@@ -373,3 +373,44 @@ Integrate a monitoring tool like Prometheus and Grafana to visualize metrics and
 This capstone project covers multiple Kubernetes topics and simulates a real-world application deployment. You can further extend this project by adding features like authentication, scaling, automated CI/CD pipelines, or integrating with a cloud provider for production-grade features. 
 
 Feel free to ask if you need any specific resources, links, or additional details on any of the steps!
+
+
+#Improvements after Phase 1:#
+
+It looks like you've shared a comprehensive configuration for your voting application deployed on Kubernetes. Here’s a quick overview of what your configuration files include:
+
+1. **Namespace**: You've created a namespace named `voting` to isolate your application's resources.
+
+2. **Ingress**: The Ingress resource routes traffic to two different services based on the hostnames `voting.com` and `result.com`. It uses an NGINX ingress controller, and the rewrite target is set to `/`.
+
+3. **Database Deployment**: You've set up a PostgreSQL deployment (`db`) with environment variables for the user and password. The deployment has resource limits and exposes port 5432.
+
+4. **Database Service**: A service named `db` that exposes port 5432 for the database.
+
+5. **Redis Deployment**: You have a Redis deployment (`redis`) for caching purposes, also with specified resource limits and exposing port 6379.
+
+6. **Redis Service**: A service for Redis to expose its port.
+
+7. **Result Deployment**: A deployment for the result service, which utilizes the `dockersamples/examplevotingapp_result` image and exposes port 80.
+
+8. **Result Service**: A service that exposes the result deployment on port 8081.
+
+9. **Vote Deployment**: This deployment runs the voting service with the `dockersamples/examplevotingapp_vote` image and exposes port 80.
+
+10. **Vote Service**: A service for the voting deployment that maps to port 8080.
+
+11. **Worker Deployment**: A deployment for a worker component using the `dockersamples/examplevotingapp_worker` image, with specified resource limits.
+
+### Suggestions and Improvements
+1. **Resource Management**: Make sure the resource limits match your actual usage and consider adding requests for CPU and memory to better manage resources.
+
+2. **Service Type**: You might want to uncomment the `type: LoadBalancer` lines for your services if you want external access (depending on your cloud provider and setup).
+
+3. **Secrets Management**: Consider using Kubernetes Secrets for sensitive information like database passwords instead of plain environment variables.
+
+4. **Health Checks**: Implement readiness and liveness probes for your deployments to ensure they are running correctly and can be restarted if they fail.
+
+5. **Networking Policies**: Depending on your security requirements, you may want to define Network Policies to restrict traffic between pods.
+
+If you have specific questions or need further assistance with this configuration, feel free to ask!
+

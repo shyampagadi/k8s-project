@@ -1,0 +1,62 @@
+{{- $namespace := .Values.namespace -}}
+{{- $name := .Release.Name -}}
+
+{{- if .Values.db.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $name }}-db
+  namespace: {{ $namespace }}
+spec:
+  selector:
+    app: db
+  ports:
+    - port: 5432
+      targetPort: 5432
+      name: db-service
+{{- end }}
+
+{{- if .Values.redis.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $name }}-redis
+  namespace: {{ $namespace }}
+spec:
+  selector:
+    app: redis
+  ports:
+    - port: 6379
+      targetPort: 6379
+      name: redis-service
+{{- end }}
+
+{{- if .Values.vote.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $name }}-vote-service
+  namespace: {{ $namespace }}
+spec:
+  selector:
+    app: vote
+  ports:
+    - port: 8080
+      targetPort: 80
+      name: vote-service
+{{- end }}
+
+{{- if .Values.result.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $name }}-result
+  namespace: {{ $namespace }}
+spec:
+  selector:
+    app: result
+  ports:
+    - port: 8081
+      targetPort: 80
+      name: result-service
+{{- end }}

@@ -1,0 +1,60 @@
+namespace: voting
+
+replicaCount: 1  # You can set the number of replicas here
+
+ingress:
+  enabled: true
+  hosts:
+    - host: voting.com
+      paths:
+        - path: /
+          serviceName: vote-service
+          servicePort: 8080
+    - host: result.com
+      paths:
+        - path: /
+          serviceName: result
+          servicePort: 8081
+
+db:
+  enabled: true
+  image: postgres:15-alpine
+  env:
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+  resources:
+    limits:
+      memory: "128Mi"
+      cpu: "500m"
+
+redis:
+  enabled: true
+  image: redis:alpine
+  resources:
+    limits:
+      memory: "128Mi"
+      cpu: "500m"
+
+vote:
+  enabled: true
+  image: dockersamples/examplevotingapp_vote
+  resources:
+    limits:
+      memory: "128Mi"
+      cpu: "500m"
+
+result:
+  enabled: true
+  image: dockersamples/examplevotingapp_result
+  resources:
+    limits:
+      memory: "128Mi"
+      cpu: "500m"
+
+worker:
+  enabled: true
+  image: dockersamples/examplevotingapp_worker
+  resources:
+    limits:
+      memory: "128Mi"
+      cpu: "500m"
