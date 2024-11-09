@@ -1,0 +1,6 @@
+name: db
+namespace: voting
+container:
+  image: postgres:15-alpine
+  containerPort: 5432
+  targetPort: 5432

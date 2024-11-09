@@ -1,0 +1,30 @@
+ apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name}}
+  namespace: voting
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.name}}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name}}
+    spec:
+      containers:
+      - name: {{ .Values.name}}
+        image: {{ .Values.container.image}}
+        env:
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: postgres
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: {{ .Values.container.containerPort }}

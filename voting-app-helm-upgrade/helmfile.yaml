@@ -1,0 +1,4 @@
+releases:
+  - name: namespace-release
+    chart: ./namespace/namespace
+    installed: true
