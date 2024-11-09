@@ -14,11 +14,11 @@ spec:
     spec:
       containers:
       - name: redis
-        image: redis:alpine
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        image: redis
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
         ports:
         - containerPort: 6379
 

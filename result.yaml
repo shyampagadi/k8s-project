@@ -15,10 +15,10 @@ spec:  # <- Indentation fixed here
       containers:
       - name: result
         image: dockersamples/examplevotingapp_result
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
         ports:
         - containerPort: 80
 
