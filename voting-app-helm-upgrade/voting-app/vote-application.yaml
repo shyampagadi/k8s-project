@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: voting-app
+  namespace: argocd                    # Ensure this matches your ArgoCD namespace
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/shyampagadi/k8s-project
+    targetRevision: main                # Branch name in Git
+    path: voting-app-helm-upgrade/voting-app  # Path to your main Helm chart
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: voting-app               # Specify the namespace for deployment
+  syncPolicy:
+    automated:                          # Optional: enables automatic syncing
+      prune: true                       # Prune resources no longer in Git
+      selfHeal: true                    # Automatically sync if out of desired state

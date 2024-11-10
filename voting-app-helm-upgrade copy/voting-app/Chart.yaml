@@ -1,0 +1,28 @@
+# voting-app/Chart.yaml
+apiVersion: v2
+name: voting-app
+description: A Helm chart for deploying the Voting App
+version: 0.1.0
+
+dependencies:
+  - name: namespace
+    version: 0.1.0
+    repository: "file://charts/namespace/namespace"
+  - name: redis
+    version: 0.1.0
+    repository: "file://charts/redis/redis"
+  - name: postgres
+    version: 0.1.0
+    repository: "file://charts/postgres/postgres"
+  - name: vote
+    version: 0.1.0
+    repository: "file://charts/vote/vote"
+  - name: result
+    version: 0.1.0
+    repository: "file://charts/result/result"
+  - name: worker
+    version: 0.1.0
+    repository: "file://charts/worker/worker"
+  - name: ingress
+    version: 0.1.0
+    repository: "file://charts/ingress"

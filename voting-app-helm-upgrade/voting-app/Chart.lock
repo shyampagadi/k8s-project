@@ -1,0 +1,24 @@
+dependencies:
+- name: namespace
+  repository: file://charts/namespace
+  version: 0.1.0
+- name: redis
+  repository: file://charts/redis
+  version: 0.1.0
+- name: postgres
+  repository: file://charts/postgres
+  version: 0.1.0
+- name: vote
+  repository: file://charts/vote
+  version: 0.1.0
+- name: result
+  repository: file://charts/result
+  version: 0.1.0
+- name: worker
+  repository: file://charts/worker
+  version: 0.1.0
+- name: ingress
+  repository: file://charts/ingress
+  version: 0.1.0
+digest: sha256:c03a843aa8a27cc4bde6a6d646626d9593c03012a8a6e60b27f26843b0aa23b0
+generated: "2024-11-10T11:35:13.617378659Z"
